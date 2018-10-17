@@ -1,8 +1,8 @@
 {
-  "name": "heroes-and-empires",
+  "name": "Narimono",
   "author": "Lewis Nakao",
   "version": "0.1.0",
-  "description": "Manage Heroes and Emores to victory Idle game.",
+  "description": "Play the Musical Instruments for the Tenrikyo Service.",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.4.3",
