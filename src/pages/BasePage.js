@@ -2,9 +2,6 @@ import { Component } from 'react';
 import { setPageTitle } from '../components/util/PageUiUtils';
 
 class BasePage extends Component {
-  state = {
-    test: "TEST TEST TEST1111"
-  }
   componentDidMount() {
     this.setPageTitle("");
 
@@ -14,11 +11,9 @@ class BasePage extends Component {
     //   console.log("window closed!!!!")
     //   this.saveData();
     // }, false);
+    
   };
 
-  getTest() {
-    return this.state.test;
-  }
   saveData() { }
 
   setPageTitle = title => {

@@ -5,7 +5,8 @@ import {
   withStyles,
 } from '@material-ui/core';
 
-import DrawerMenu from './components/ui/DrawerMenu';
+import Notifier from 'components/ui/Notifier';
+import DrawerMenu from 'components/ui/DrawerMenu';
 
 const styles = theme => ({
   toolbar: {
@@ -27,6 +28,7 @@ const App = () => (
   <Fragment>
     <CssBaseline />
     <DrawerMenu />
+    <Notifier />
   </Fragment>
 );
 

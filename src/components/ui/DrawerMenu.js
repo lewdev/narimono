@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { Route, } from 'react-router-dom';
 import { withStyles, } from '@material-ui/core';
 
-import AppHeader from '../AppHeader.js'
-import MainLayout from './MainLayout.js'
+import AppHeader from 'components/AppHeader'
+import MainLayout from 'components/ui/MainLayout'
 
-import Dashboard from '../../pages/Dashboard';
+import Dashboard from 'pages/dashboard/Dashboard';
+import Instrument from 'pages/instrument/Instrument';
+import { instrumentList } from 'data/InstrumentData';
 
 const styles = theme => ({
   root: {
@@ -69,6 +71,9 @@ class DrawerMenu extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Route exact path="/" component={Dashboard} />
+          {instrumentList.map(instrument => 
+            <Route exact path={"/" + instrument} component={Instrument} />
+          )}
         </main>
       </div>
     );
