@@ -40,6 +40,12 @@ class AppHeader extends React.Component {
     return (
       <AppBar className={classes.appBar}>
         <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={drawerToggle}>
+            <MenuIcon />
+          </IconButton>
           <Button color="inherit" component={Link} to="/">
             <div className={classes.logoIcon}>
               {/* <img src="/images/"
