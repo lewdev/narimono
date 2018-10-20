@@ -16,6 +16,7 @@ import { find } from 'lodash';
 import { compose } from 'recompose';
 
 //import { instrumentList } from 'data/InstrumentData';
+import Hyoshigi         from 'components/instrument/Hyoshigi';
 import InstrumentAction from 'pages/instrument/InstrumentAction';
 import BasePage from 'pages/BasePage';
 
@@ -110,6 +111,7 @@ class Instrument extends BasePage {
       <Fragment>
         {instrumentName}
         
+        <Route exact path={"/Hyoshigi"} component={<Hyoshigi action={this.instrumentAction} />}  />
       </Fragment>
     );
   }

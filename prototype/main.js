@@ -145,7 +145,7 @@ function playSong(songName, instrument) {
 function createButton(name) {
   //console.log(name);
   var btn = document.createElement('button');
-  var audio = new Audio("public/sounds/" + name + '.mp3');
+  var audio = new Audio("../public/sounds/" + name + '.mp3');
   btn.innerHTML = name;
   btn.className = "narimono-btn btn btn-secondary";
   btn.onclick = function() { playSoundByName(name); };
