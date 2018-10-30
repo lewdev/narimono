@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
-//import { withRouter, Route, Redirect, Link } from 'react-router-dom';
+import { withRouter, Route, Redirect, Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import {
   withStyles, Button,
+  Card, CardContent, CardActions,
+  Modal, //Grid, List, ListItem, ListItemText,
 } from '@material-ui/core';
 // import {
 //   Add as AddIcon,
@@ -49,21 +51,15 @@ const styles = theme => ({
 });
 
 @observer
-class Hyoshigi extends React.Component {
+class Song extends React.Component {
   render() {
-    const { action } = this.props;
+    const { instrument, song } = this.props;
     return (
       <Fragment>
-        <table className="narimono-btn-table">
-          <tbody>
-            <tr>
-              <td><Button className="two-btn btn btn-secondary" onClick={() => action.playSoundByName('Hyoshigi')}>&verbar; &verbar;</Button></td>
-            </tr>
-          </tbody>
-        </table>
+        Display "{instrument}" - "{song}"
       </Fragment>
     );
   }
 }
 
-export default compose(withStyles(styles))(Hyoshigi);
+export default compose(withStyles(styles))(Song);

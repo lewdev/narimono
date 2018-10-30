@@ -1,24 +1,18 @@
 import React, { Fragment } from 'react';
-import { withRouter, Route, Redirect, Link } from 'react-router-dom';
+import { withRouter, Route, Redirect, } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import {
   withStyles, Button,
   Card, CardContent, CardActions,
-  Modal, //Grid, List, ListItem, ListItemText,
+  Modal,
 } from '@material-ui/core';
-// import {
-//   Add as AddIcon,
-//   // Delete as DeleteIcon,
-//   // Accessibility as PersonIcon,
-//   AccountCircle as ProfileIcon,
-// } from '@material-ui/icons';
-import { find } from 'lodash';
+//import { find } from 'lodash';
 import { compose } from 'recompose';
 
-//import { instrumentList } from 'data/InstrumentData';
+import Song             from 'components/song/Song';
 import Hyoshigi         from 'components/instrument/Hyoshigi';
 import InstrumentAction from 'pages/instrument/InstrumentAction';
-import BasePage from 'pages/BasePage';
+import BasePage         from 'pages/BasePage';
 
 const styles = theme => ({
   root: {
@@ -83,21 +77,18 @@ class Instrument extends BasePage {
     localStorage.setItem("narimono", JSON.stringify(data));
   }
 
-  renderPostDelete = ({ match: { params: { id } } }) => {
-    if (this.state.loading) return null;
-    const person = find(this.state.persons, { id: Number(id) });
-
-    if (!person && id !== 'new') return <Redirect to="/person" />;
-
+  renderInstrument = ({ match: { params: { instrumentName } } }) => {
+    if (instrumentName === 'Hyoshigi') {
+      return <Hyoshigi action={this.instrumentAction} />
+    }
     return (
-      <Modal className={styles.modal} onClose={() => this.props.history.push('/person')} open>
+      <Modal className={styles.modal} onClose={() => this.props.history.push('/')} open>
         <Card className={styles.modalCard}>
           <CardContent className={styles.modalCardContent}>
-            Are you sure you want to delete "{person.title}"?
+            Instrument '{instrumentName}' was not created yet.
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={() => this.deletePostGo(person)}>Yes</Button>
-            <Button size="small" onClick={() => this.props.history.push('/person')}>No</Button>
+            <Button size="small" onClick={() => this.props.history.push('/')}>Close</Button>
           </CardActions>
         </Card>
       </Modal>
@@ -105,13 +96,11 @@ class Instrument extends BasePage {
   };
 
   render() {
-    //const { classes } = this.props;
-    const { instrumentName } = this.instrumentAction;
+    const { selectedInstrument, selectedSong } = this.instrumentAction;
     return (
       <Fragment>
-        {instrumentName}
-        
-        <Route exact path={"/Hyoshigi"} component={<Hyoshigi action={this.instrumentAction} />}  />
+        <Song instrument={selectedInstrument} song={selectedSong} />
+        <Route exact path={"/:instrumentName"} render={this.renderInstrument}  />
       </Fragment>
     );
   }

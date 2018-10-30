@@ -3,7 +3,8 @@ import { instrumentList, shortcutRef, soundNameList } from 'data/InstrumentData'
 import { observable } from 'mobx';
 
 export default class InstrumentAction {
-  @observable instrumentName = null;
+  @observable selectedInstrument = null;
+  @observable selectedSong = null;
   INTERVAL_MS = 500;
   audioSet = {};
 
@@ -21,9 +22,9 @@ export default class InstrumentAction {
     });
   }
 
-  setInstrumentByName(instrumentName) {
-    console.log("setInstrumentByName instrumentName=" + instrumentName);
-    this.instrumentName = instrumentName;
+  setInstrumentByName(selectedInstrument) {
+    console.log("setInstrumentByName selectedInstrument=" + selectedInstrument);
+    this.selectedInstrument = selectedInstrument;
   }
 
   playSoundByName(name) {

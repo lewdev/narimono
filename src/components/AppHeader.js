@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import {
   Menu as MenuIcon,
-  // Assignment as MainIcon,
+  LibraryMusic as AppLogoIcon,
 } from '@material-ui/icons';
 
 const styles = {
@@ -19,8 +19,6 @@ const styles = {
     fontSize: 20,
     fontStyle: "italic",
     margin: "0",
-    position: "relative",
-    left: -8,
   },
   topBannerFirst: {
     fontWeight: "bold",
@@ -51,7 +49,7 @@ class AppHeader extends React.Component {
               {/* <img src="/images/"
                 alt="Heroes &amp; Empires"
                 style={{ height: 33 }} /> */}
-                LOGO
+              <AppLogoIcon />
             </div>
 
             <h3 style={styles.topBanner}>

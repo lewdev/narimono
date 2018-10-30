@@ -1,0 +1,52 @@
+-------------------------------------------------------------------------------
+  TODO
+-------------------------------------------------------------------------------
+
+Finish Hyoshigi component.
+
+Create components for all the other instruments, which is basically just the button layout.
+
+Display song and dropdown song selection.
+
+-------------------------------------------------------------------------------
+  Song list for a given Instrument (two sets: with and without showing notes)
+-------------------------------------------------------------------------------
+Section 1  [best score] [rating icon]
+Section 2
+Section 3
+Yorozuyo
+Song 1
+...
+
+Overall Score (accumulation score)
+
+-------------------------------------------------------------------------------
+  Song/Instrument Grid
+-------------------------------------------------------------------------------
+Section 1  [Hyoshigi] [Chanpon] ...
+Section 2
+Section 3
+Yorozuyo
+Song 1
+...
+
+-------------------------------------------------------------------------------
+  Unlocking scheme
+-------------------------------------------------------------------------------
+Score ratings: Bronze, Silver, Gold, Platinum (100%)
+
+Note ratings: Okay, Good, Perfect
+
+*Miss subtracts score?
+
+Section 1-3 is unlocked by default
+
+Unlock path
+1. Section 1-3
+2. Yorozuyo
+3. First Half
+4. Second Half
+
+-------------------------------------------------------------------------------
+  Achievements
+-------------------------------------------------------------------------------

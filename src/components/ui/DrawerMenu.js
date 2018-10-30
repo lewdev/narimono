@@ -4,7 +4,7 @@ import { Route, } from 'react-router-dom';
 import { withStyles, } from '@material-ui/core';
 
 import AppHeader from 'components/AppHeader'
-import MainLayout from 'components/ui/MainLayout'
+import DrawerLayout from 'components/ui/DrawerLayout'
 
 import Dashboard from 'pages/dashboard/Dashboard';
 import Instrument from 'pages/instrument/Instrument';
@@ -68,6 +68,10 @@ class DrawerMenu extends React.Component {
       <div className={classes.root}>
         <AppHeader classes={classes}
           drawerToggle={this.handleDrawerToggle} />
+        <DrawerLayout theme={classes.theme} classes={classes}
+          drawerToggle={this.handleDrawerToggle}
+          drawerOpen={this.state.drawerOpen}
+        />
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Route exact path="/" component={Dashboard} />
