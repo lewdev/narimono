@@ -5,7 +5,6 @@ export const roundPrice = (num) => {
 };
 
 export const formatPrice = (price) => {
-  //return "$" + roundPrice(price).toFixed(2);
   return "$" + addCommas(roundPrice(price).toFixed(2));
 };
 

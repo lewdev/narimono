@@ -1,8 +1,8 @@
 {
-  "name": "heroes-and-empires",
+  "name": "Narimono",
   "author": "Lewis Nakao",
   "version": "0.1.0",
-  "description": "Manage Heroes and Emores to victory Idle game.",
+  "description": "Play the Musical Instruments for the Tenrikyo Service.",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.4.3",
@@ -14,9 +14,13 @@
     "epilogue": "^0.7.1",
     "final-form": "^4.9.1",
     "lodash": "^4.17.10",
+    "mobx": "^5.5.1",
+    "mobx-react": "^5.3.2",
     "moment": "^2.22.2",
     "npm": "^6.3.0",
     "react": "^16.4.2",
+    "react-app-rewire-mobx": "^1.0.9",
+    "react-app-rewired": "^1.6.2",
     "react-dom": "^16.4.2",
     "react-final-form": "^3.6.5",
     "react-material-ui-form-validator": "^2.0.1",
@@ -29,9 +33,9 @@
     "yarn": "^1.9.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build NODE_PATH=src/",
+    "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {

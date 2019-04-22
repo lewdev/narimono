@@ -1,6 +1,7 @@
 
 var buttonListDiv = document.getElementById("buttonList");
 var displaySongDiv = document.getElementById("displaySong");
+var instrumentList = ["Hyoshigi", "Chanpon", "Kotsuzumi", "Taiko", "Surigane", "Fue", "Koto"];
 var soundNameList = [
   "Signal", "Hyoshigi", "Chanpon", "Kotsuzumi", "Taiko",
   "Surigane-1", "Surigane-2",
@@ -31,19 +32,29 @@ var shortcutRef = {
   "=": "Koto-12",
   "]": "Koto-13"
 }
+var INTERVAL_MS = 500;
 var songs = {
+  "start": {
+    name: "Start",
+    lyrics: [[null, null, "(eh)", null]],
+    Signal: [[1,    null, null, null]]
+  },
   "section1": {
     name: "Section 1",
-    lines: [["Ashi", "ki o", "haro", "-ote", "ta", "suke", "tamae"],
-      ["Ten", "-ri", "-O-", "no", "Mi", "ko", "to"]],
-    Fue: [[2, null, 2, 2, 3, 5, 3],
-        [3, 2, 6, 3, 6, 2, 2]]
+    lyrics: [ ["A",    "shi","ki",  "o",  "ha",   "ro", "(o)", "te","ta", "",   "su", "ke", "ta",  "",  "ma",  "e"],
+              ["Ten",  "",   "ri",  "",   "-O-",  "",   "no",  "",  "Mi", "",   "ko", "",   "to",  "",   ""]],
+    Fue: [    [2,     null,  null,  2,    2,      null, null,  3,   5,    null, null, 3,    3,     null, 2,    7],
+              [3,     null,  3,     null, 2,      null, 6,    null, 7,    null, 2,   null,  2,     null, null]],
+    Hyoshigi: [[1,    null,  null,  null, 1,      null, null, null, 1,    null, null, null, 1,     null,  null, null],
+              [1,     null,  null,  null, 1,      null, null, null, 1,    null, null, null, 1,     null,  null]],
+    Chanpon: [[null,  null, 1,      null, null,   null, 1,    null, null, null, 1,    null, null,  null,  1,    null],
+              [null,  null, 1,      null, null,   null, 1,    null, null, null, 1,    null, null,  null,  null]],
   }
 };
 var audioList = {};
 
 function playSoundByName(name) {
-  //stop other fue sounds if fue is going to be played.
+  //stop other fue sounds if fue is going to be played next.
   var arr = name.split("-");
   var nameStart = arr[0];
   if (nameStart === "Fue") {
@@ -66,28 +77,36 @@ function playSoundByName(name) {
   audio.play();
 }
 
-var songInterval;
-function playSong(songName) {
+function displaySong(songName, instrument) {
   var song = songs[songName];
   if (song) {
-    var songLinesLength = song.lines.length;
     //displaySong
-    displaySongDiv.innerHTML = "";
+    var songLinesLength = song.lyrics.length;
     var table = document.createElement("table");
-    for (var i = 0; i < song.lines.length; i++) {
+    for (var i = 0; i < song.lyrics.length; i++) {
       var tr = document.createElement("tr");
-      for (var j = 0; j < song.lines[i].length; j++) {
+      for (var j = 0; j < song.lyrics[i].length; j++) {
         var td = document.createElement("td");
         td.id = songName + i + "-" + j;
-        td.innerHTML = song.lines[i][j];
+        td.innerHTML = song.lyrics[i][j];
         tr.append(td);
       }
       table.append(tr);
     }
     displaySongDiv.append(table);
-    clearInterval(songInterval);
+  }
+}
+
+var songInterval;
+function playSong(songName, instrument) {
+  var song = songs[songName];
+  if (song) {
+    displaySongDiv.innerHTML = "";
+    displaySong(songName, instrument);
+    var songLinesLength = song.lyrics.length;
 
     //play song
+    clearInterval(songInterval);
     var lineIndex = 0;
     var lyricIndex = 0;
     songInterval = setInterval(function() {
@@ -96,11 +115,22 @@ function playSong(songName) {
         if (td) {
           td.style.color = "red";
         }
-        var note = song.Fue[lineIndex][lyricIndex++];
+        var note = song[instrument][lineIndex][lyricIndex++];
+        console.log("note=" + note + ", instrument=" + instrument + ", lineIndex=" + lineIndex + ", lyricIndex=" + lyricIndex);
         if (note) {
-          playSoundByName("Fue-" + note);
+          if (instrument === "Hyoshigi"
+            || instrument === "Taiko"
+            || instrument === "Chanpon"
+            || instrument === "Kotsuzumi"
+            || instrument === "Signal"
+          ) {
+            playSoundByName(instrument);
+          }
+          else {
+            playSoundByName(instrument + "-" + note);
+          }
         }
-        if (lyricIndex >= song.lines[lineIndex].length) {
+        if (lyricIndex >= song.lyrics[lineIndex].length) {
           lineIndex++;
           lyricIndex = 0;
         }
@@ -108,16 +138,16 @@ function playSong(songName) {
       else {
         clearInterval(songInterval);
       }
-    }, 1000);
+    }, INTERVAL_MS);
   }
 }
 
 function createButton(name) {
   //console.log(name);
   var btn = document.createElement('button');
-  var audio = new Audio("public/sounds/" + name + '.mp3');
+  var audio = new Audio("../public/sounds/" + name + '.mp3');
   btn.innerHTML = name;
-  btn.className = "narimono";
+  btn.className = "narimono-btn btn btn-secondary";
   btn.onclick = function() { playSoundByName(name); };
   audioList[name] = { name: name, audio: audio };
   return btn;
@@ -129,7 +159,7 @@ function init() {
   for (var i = 0; i < soundNameList.length; i++) {
     var soundName = soundNameList[i];
     var li = document.createElement('li');
-    li.className = "narimonoListItem";
+    li.className = "narimono-list-item";
     li.append(createButton(soundName));
 
     var shortcutKey = null;
@@ -144,7 +174,6 @@ function init() {
       span.innerHTML = "Press '" + shortcutKey + "'";
       li.append(span);
     }
-
     ul.append(li);
   }
   buttonListDiv.append(ul);

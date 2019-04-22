@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import {
   Menu as MenuIcon,
-  // Assignment as MainIcon,
+  LibraryMusic as AppLogoIcon,
 } from '@material-ui/icons';
 
 const styles = {
@@ -19,8 +19,6 @@ const styles = {
     fontSize: 20,
     fontStyle: "italic",
     margin: "0",
-    position: "relative",
-    left: -8,
   },
   topBannerFirst: {
     fontWeight: "bold",
@@ -40,12 +38,18 @@ class AppHeader extends React.Component {
     return (
       <AppBar className={classes.appBar}>
         <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={drawerToggle}>
+            <MenuIcon />
+          </IconButton>
           <Button color="inherit" component={Link} to="/">
             <div className={classes.logoIcon}>
               {/* <img src="/images/"
                 alt="Heroes &amp; Empires"
                 style={{ height: 33 }} /> */}
-                LOGO
+              <AppLogoIcon />
             </div>
 
             <h3 style={styles.topBanner}>
