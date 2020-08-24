@@ -30,7 +30,7 @@
     "react-validation": "^3.0.7",
     "recompose": "^0.28.2",
     "url": "^0.11.0",
-    "yarn": "^1.9.4"
+    "yarn": "^1.22.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
